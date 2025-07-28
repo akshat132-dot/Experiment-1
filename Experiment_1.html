@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .form-container {
+      width: 300px;
+      margin: 50px auto;
+    }
+
+    h1 {
+      font-weight: bold;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"] {
+      width: 100%;
+      padding: 6px;
+      margin-top: 4px;
+      margin-bottom: 12px;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      background-color: white;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 4px;
+    }
+
+    button:hover {
+      background-color: #f0f0f0;
+    }
+
+    .error {
+      color: red;
+      font-size: 0.9em;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Student Registration Form</h1>
+
+    <form id="registrationForm" onsubmit="return validateForm()">
+      <label for="name">Name:</label><br>
+      <input type="text" id="name" name="name" placeholder="Enter your full name"><br>
+
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" name="email" placeholder="Enter your email"><br>
+
+      <label for="age">Age:</label><br>
+      <input type="number" id="age" name="age" placeholder="Enter"><br>
+
+      <div class="error" id="errorMsg"></div>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <script>
+    function validateForm() {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const age = parseInt(document.getElementById("age").value.trim(), 10);
+      const errorMsg = document.getElementById("errorMsg");
+
+      errorMsg.textContent = "";
+
+      if (name === "") {
+        errorMsg.textContent = "Please enter your name.";
+        return false;
+      }
+
+      if (email === "") {
+        errorMsg.textContent = "Please enter your email.";
+        return false;
+      }
+
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (!emailPattern.test(email)) {
+        errorMsg.textContent = "Please enter a valid email address.";
+        return false;
+      }
+
+      if (isNaN(age) || age < 15 || age > 50) {
+        errorMsg.textContent = "Age must be between 15 and 50.";
+        return false;
+      }
+
+      alert("Form submitted successfully!");
+      return true;
+    }
+  </script>
+</body>
+</html>
